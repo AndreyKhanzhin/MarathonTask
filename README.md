@@ -1,3 +1,6 @@
+![изображение](https://github.com/user-attachments/assets/50fe4411-84b4-4cbb-91f5-2944f22aa341)
+
+
 #1 Запрос выводит полное имя и код страны зарегистрированных на текущий марафон бегунов.
 select distinct u."firstname", u."lastname", r2.countrycode 
 from "Registration" r join "Runner" r2 on r2.runnerid = r.runnerid 
