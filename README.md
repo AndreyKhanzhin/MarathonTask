@@ -7,7 +7,7 @@ join "Event" e on re.eventid = e.eventid
 where e.marathonid = '5';
 
 #2
-select g.gender , age(r2."DateOfBirth"), e."EventName"
+select g.gender , extract(year from age(r2."DateOfBirth")), e."EventName"
 from "Event" e join "RegistrationEvent" re on re."EventId" = e."EventId" 
 join "Registration" r on r."RegistrationId" = re."RegistrationId" 
 join "Runner" r2 on r2."RunnerId" = r."RunnerId" 
@@ -41,7 +41,7 @@ WHERE ev.marathonid = '3' AND rei.racetime != 0
 ORDER BY ev.eventname ASC, g.gender asc, race_time asc;
 
 #4
-select u."firstname", u."lastname",  age(rnr."dateofbirth"), g."gender", m."marathonname", ev."eventname",  c."countryname", 
+select u."firstname", u."lastname", extract(year from age(rnr."dateofbirth")), g."gender", m."marathonname", ev."eventname",  c."countryname", 
 TO_CHAR((rei."racetime" || ' seconds')::interval, 'HH24:MI:SS') AS race_time,
 ROW_NUMBER() OVER (PARTITION BY ev."eventname" ORDER BY rei."racetime" ASC) AS pposition
 FROM "Event" ev
